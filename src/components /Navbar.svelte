@@ -1,8 +1,9 @@
 <script>
   import { onMount } from 'svelte';
-  import { writable, derived } from 'svelte/store';
+  import { writable } from 'svelte/store';
   import { goto } from '$app/navigation';
   import {
+    // @ts-ignore
     initWeb3Auth,
     connectWallet,
     logout,
@@ -27,21 +28,28 @@
     }
   });
 
+
   async function handleLogin() {
-    try {
-      const wallet = await connectWallet();
+  try {
+    const wallet = await connectWallet();
+    if (wallet) {
       console.log('Connected wallet:', wallet);
       isLoggedIn.set(true); // Update login status
-      // Handle the connected wallet
 
-         // Fetch and display the account balance
+      // Fetch and display the account balance
+      // @ts-ignore
       const balance = await getAccountBalance(wallet);
       console.log(`Account Balance: ${balance} SOL`);
-    } catch (error) {
-      console.error('Login failed:', error);
-      // Handle error
+    } else {
+      console.log('Wallet connection failed');
+      // Handle the failed connection appropriately
     }
+  } catch (error) {
+    console.error('Login failed:', error);
+    // Handle error
   }
+}
+
 
   async function handleLogout() {
     try {
