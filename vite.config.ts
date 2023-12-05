@@ -15,6 +15,7 @@ export default defineConfig({
 		}),
 		sveltekit(),
 	],
+	build: {chunkSizeWarningLimit:2000 },
 	optimizeDeps: {
 		include: ["dayjs/plugin/relativeTime.js", "dayjs", "@web3auth/ethereum-provider"],
 	},
