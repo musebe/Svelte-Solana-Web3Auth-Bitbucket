@@ -136,3 +136,17 @@ export async function loginWithBitbucket() {
         console.error('Error logging in with Bitbucket:', error);
     }
 }
+
+
+
+
+
+
+
+//TO-DO
+
+// - Redirect to /dashboard on login 
+// - Update Readme
+// - Get Transactions via Bitbucket Login
+// - Record a gif showing the working 
+// - Deploy To vercel 
