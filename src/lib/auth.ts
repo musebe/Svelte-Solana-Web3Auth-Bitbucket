@@ -1,13 +1,13 @@
 // src/lib/auth.ts
 import { Web3Auth } from "@web3auth/modal";
-import { CHAIN_NAMESPACES } from "@web3auth/base";
+// import { CHAIN_NAMESPACES } from "@web3auth/base";
 import { SolanaWallet,SolanaPrivateKeyProvider } from "@web3auth/solana-provider";
 import { Connection, PublicKey, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
 
 
 const chainConfig = {
-    chainNamespace: CHAIN_NAMESPACES.SOLANA,
+    chainNamespace: "solana",
     chainId: "0x3", // Mainnet
     rpcTarget: "https://summer-frosty-friday.solana-devnet.quiknode.pro/5430f85cfb9a90ac2763131b24d8a746f2d18825",
     displayName: "Sapphire Devnet",
