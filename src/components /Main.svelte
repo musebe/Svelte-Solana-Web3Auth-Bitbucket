@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { loginWithBitbucket, initWeb3Auth,  getAccountBalance, connectWallet, } from '../lib/auth';
+  import { loginWithBitbucket, initWeb3Auth,  getAccountBalance, connectWallet,logout } from '../lib/auth';
   import { writable } from 'svelte/store';
   import { goto } from '$app/navigation';
 
@@ -22,17 +22,36 @@
     }
   });
 
-  async function handleLogin() {
+ async function handleLogin() {
     try {
       console.log('Logging in with Bitbucket...');
       await loginWithBitbucket();
       console.log('Login successful.');
-      // Handle login success
+
+      // Delay for 3 seconds before redirecting
+      setTimeout(() => {
+        // Force redirect to the dashboard after 3 seconds
+        goto('/dashboard');
+      }, 3000); // 3000 milliseconds = 3 seconds
     } catch (error) {
       console.error('Login failed:', error);
       // Handle login failure
     }
   }
+
+  async function handleLogout() {
+  try {
+    await logout();
+    console.log('Logged out successfully');
+    isLoggedIn.set(false); // Update login status to reflect the user is logged out
+
+    // Redirect to the homepage
+    goto('/'); // Redirects to the homepage route
+  } catch (error) {
+    console.error('Logout failed:', error);
+    // Handle the error appropriately
+  }
+}
 
 
 </script>

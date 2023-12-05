@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { writable } from 'svelte/store';
   import { goto } from '$app/navigation';
+
   import {
     // @ts-ignore
     initWeb3Auth,
@@ -28,37 +29,45 @@
     }
   });
 
+  // Function to create a delay
+  /**
+   * @param {number | undefined} ms
+   */
+  function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 
   async function handleLogin() {
-  try {
-    const wallet = await connectWallet();
-    if (wallet) {
-      console.log('Connected wallet:', wallet);
-      isLoggedIn.set(true); // Update login status
+    try {
+      const wallet = await connectWallet();
+      if (wallet) {
+         console.log('Connected wallet:', wallet);
+        await delay(4000);
+        isLoggedIn.set(true);
 
-      // Fetch and display the account balance
-      // @ts-ignore
-      const balance = await getAccountBalance(wallet);
-      console.log(`Account Balance: ${balance} SOL`);
-    } else {
-      console.log('Wallet connection failed');
-      // Handle the failed connection appropriately
+        const balance = await getAccountBalance(wallet);
+        console.log(`Account Balance: ${balance} SOL`);
+
+        goto('/dashboard');
+      } else {
+        console.log('Wallet connection failed');
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
     }
-  } catch (error) {
-    console.error('Login failed:', error);
-    // Handle error
   }
-}
-
 
   async function handleLogout() {
     try {
       await logout();
       console.log('Logged out successfully');
-      isLoggedIn.set(false); // Update login status
-      // Handle the post-logout logic here, like updating UI
+      isLoggedIn.set(false); // Update login status to reflect the user is logged out
+
+      // Redirect to the homepage
+      goto('/'); // Redirects to the homepage route
     } catch (error) {
       console.error('Logout failed:', error);
+      // Handle the error appropriately
     }
   }
 </script>
@@ -93,7 +102,3 @@
     </div>
   </div>
 </nav>
-
-<style>
-  /* Custom styles can be added here */
-</style>

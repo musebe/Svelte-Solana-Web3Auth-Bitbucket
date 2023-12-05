@@ -56,7 +56,7 @@ export async function initWeb3Auth(): Promise<void> {
     console.log("Web3Auth modal initialized.");
 }
 
-export async function connectWallet(): Promise<SolanaWallet | null> {
+export async function connectWallet() {
     console.log("Connecting to wallet...");
     const provider = await web3auth.connect();
 
@@ -69,15 +69,18 @@ export async function connectWallet(): Promise<SolanaWallet | null> {
     const solanaWallet = new SolanaWallet(provider);
     console.log("SolanaWallet instance created.");
 
+    let userInfo = null;
     try {
-        const user = await web3auth.getUserInfo();
-        console.log("User info retrieved:", user);
+        userInfo = await web3auth.getUserInfo();
+        console.log("User info retrieved:", userInfo);
     } catch (error) {
         console.error("Error retrieving user info:", error);
     }
 
-    return solanaWallet;
+    // Return both the wallet instance and the user info
+    return { solanaWallet, userInfo };
 }
+
 
 
 // logout function
@@ -145,8 +148,6 @@ export async function loginWithBitbucket() {
 
 //TO-DO
 
-// - Redirect to /dashboard on login 
-// - Update Readme
 // - Get Transactions via Bitbucket Login
 // - Record a gif showing the working 
 // - Deploy To vercel 
