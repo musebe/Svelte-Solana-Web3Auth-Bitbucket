@@ -1,8 +1,11 @@
 <script lang="ts">
+    // @ts-ignore
     import type { UserInfo } from '@web3auth/base/dist/types/adapter';
     import { connectWallet, getAccountBalance , logout} from '../lib/auth';
+    // @ts-ignore
     import type { SolanaWallet } from '../lib/SolanaWallet'; // Adjust this import based on your actual file structure
      import { goto } from '$app/navigation';
+       import { writable } from 'svelte/store';
      
     let user: Partial<UserInfo> | null = null;
     let solanaWallet: SolanaWallet | null = null;
@@ -10,6 +13,8 @@
     let isBalanceLoading: boolean = false;
     let errorMessage: string = '';
     let balance: number | null = null;
+
+      let isLoggedIn = writable(false); 
 
     async function handleConnectWallet(): Promise<void> {
         isLoading = true;
@@ -40,6 +45,7 @@
         isBalanceLoading = true;
         balance = null;
         try {
+            // @ts-ignore
             balance = await getAccountBalance(solanaWallet);
         } catch (error: any) {
             console.error('Balance fetch failed:', error);

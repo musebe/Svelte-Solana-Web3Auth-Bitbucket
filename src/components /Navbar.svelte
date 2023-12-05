@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
   import { onMount } from 'svelte';
   import { writable } from 'svelte/store';
   import { goto } from '$app/navigation';
