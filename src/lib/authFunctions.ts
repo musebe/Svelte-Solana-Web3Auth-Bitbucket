@@ -7,10 +7,15 @@ import { Connection, PublicKey, LAMPORTS_PER_SOL } from "@solana/web3.js";
  * Initializes the Web3Auth modal.
  */
 export async function initWeb3Auth(): Promise<void> {
-    console.log("Initializing Web3Auth modal...");
-    await web3auth.initModal();
-    console.log("Web3Auth modal initialized.");
+    if (!web3auth.provider) { // Check if the Web3Auth provider is already set
+        console.log("Initializing Web3Auth modal...");
+        await web3auth.initModal();
+        console.log("Web3Auth modal initialized.");
+    } else {
+        console.log("Web3Auth modal already initialized.");
+    }
 }
+
 
 /**
  * Connects to the user's wallet and retrieves user info.

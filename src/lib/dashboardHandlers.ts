@@ -6,7 +6,7 @@ import { goto } from '$app/navigation';
 import { writable } from 'svelte/store';
 
 export const user = writable<Partial<UserInfo> | null>(null);
-export const solanaWallet = writable<SolanaWallet | null>(null);
+export let solanaWallet = writable<SolanaWallet | null>(null);
 export const isLoading = writable<boolean>(false);
 export const isBalanceLoading = writable<boolean>(false);
 export const errorMessage = writable<string>('');
@@ -62,27 +62,17 @@ export async function handleGetAccountBalance(): Promise<void> {
     balance.set(null);
     try {
         balance.set(await getAccountBalance(currentSolanaWallet));
-    } catch (error: unknown) { // Change from any to unknown
-        if (error instanceof Error) {
-            console.error('Balance fetch failed:', error);
-            errorMessage.set(error.message || 'An error occurred while fetching balance.');
-        } else {
-            // Handle the case where error is not an instance of Error
-            console.error('Unknown error during balance fetch');
-            errorMessage.set('An unknown error occurred while fetching balance.');
-        }
+    } catch (error: any) {
+        console.error('Balance fetch failed:', error);
+        errorMessage.set(error.message || 'An error occurred while fetching balance.');
     } finally {
         isBalanceLoading.set(false);
     }
 }
-
-
-
-
-
 /**
- * Handles user logout.
+ * Handles user logout
  */
+
 export async function handleLogout(): Promise<void> {
     try {
         await logout();
