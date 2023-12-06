@@ -5,7 +5,10 @@ import { defineConfig } from 'vite';
 /** @type {import('@sveltejs/kit').Config} */
 const config = defineConfig({
   kit: {
-    adapter: adapter(),
+    adapter: adapter({
+      // options are optional
+      // more details on options can be found in the documentation
+    }),
     // Other kit options can be added here
   },
   preprocess: vitePreprocess(),

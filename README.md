@@ -3,6 +3,10 @@
 
 This guide provides detailed steps to integrate Web3Auth and BitBucket in a Svelte project tailored for Solana blockchain applications, including Auth0 integration for authentication.
 
+## Application Demo
+
+To explore and engage with the finished application, please visit the following StackBlitz link: [Svelte Solana Web3Auth Bitbucket Application](https://stackblitz.com/~/github.com/musebe/Svelte-Solana-Web3Auth-Bitbucket).
+
 
 ## Prerequisites
 
