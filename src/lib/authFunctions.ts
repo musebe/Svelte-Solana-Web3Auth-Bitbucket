@@ -47,22 +47,21 @@ export async function logout(): Promise<void> {
  * Fetches the account balance of the connected wallet.
  */
 
-export async function getAccountBalance(): Promise<number> {
+export async function getAccountBalance(wallet: SolanaWallet): Promise<number> {
     console.log("getAccountBalance: Function called");
 
-    if (!web3auth.provider) {
-        console.error("getAccountBalance: Wallet is not connected");
-        throw new Error("Wallet is not connected.");
+    if (!wallet) {
+        console.error("getAccountBalance: Wallet is not provided");
+        throw new Error("Wallet is not provided.");
     }
 
     console.log("getAccountBalance: Wallet provider is available");
 
     try {
-        const solanaWallet = new SolanaWallet(web3auth.provider);
-        const accounts = await solanaWallet.requestAccounts();
+        const accounts = await wallet.requestAccounts();
         console.log("getAccountBalance: Accounts retrieved", accounts);
 
-        const connectionConfig = await solanaWallet.request({
+        const connectionConfig = await wallet.request({
             method: "solana_provider_config",
             params: [],
         }) as { rpcTarget: string };
@@ -81,6 +80,7 @@ export async function getAccountBalance(): Promise<number> {
         throw error; // Rethrow the error to be handled by the caller
     }
 }
+
 
 /**
  * Initiates login process using Bitbucket as a provider.
