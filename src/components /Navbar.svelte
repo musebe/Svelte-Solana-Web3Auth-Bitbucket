@@ -6,12 +6,11 @@
   import { goto } from '$app/navigation';
 
   import {
-    // @ts-ignore
     initWeb3Auth,
     connectWallet,
     logout,
     getAccountBalance,
-  } from '../lib/auth';
+  } from '../lib/authFunctions'; // Updated import path
 
   let isMenuOpen = false;
   let isLoggedIn = writable(false); // Reactive variable to track login status
@@ -47,7 +46,7 @@
         await delay(4000);
         isLoggedIn.set(true);
 
-        const balance = await getAccountBalance(wallet);
+        const balance = await getAccountBalance();
         console.log(`Account Balance: ${balance} SOL`);
 
         goto('/dashboard');
@@ -73,6 +72,9 @@
     }
   }
 </script>
+
+<!-- HTML code remains the same -->
+
 
 <nav class="bg-white shadow-lg">
   <div class="max-w-6xl mx-auto px-4">
