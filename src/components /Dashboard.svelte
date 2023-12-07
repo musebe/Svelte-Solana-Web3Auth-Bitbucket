@@ -1,6 +1,5 @@
 <script lang="ts">
   import { handleConnectWallet, handleGetAccountBalance, handleLogout, user, solanaWallet, isLoading, isBalanceLoading, errorMessage, balance } from '../lib/dashboardHandlers';
-  import { writable } from 'svelte/store';
   import type { UserInfo } from '@web3auth/base/dist/types/adapter';
   import type { SolanaWallet } from '@web3auth/solana-provider';
 

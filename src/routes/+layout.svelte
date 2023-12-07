@@ -22,7 +22,7 @@
 
 <div class="flex flex-col h-screen">
   <!-- Navbar -->
-  <Navbar {scrollPositionY} {viewportHeight} />
+  <Navbar />
 
   <!-- Main content -->
  <div class="flex-grow mx-4 md:mx-8 lg:mx-12 my-6 rounded-lg">

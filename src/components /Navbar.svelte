@@ -1,19 +1,15 @@
 <script>
-// @ts-nocheck
+  // @ts-nocheck
 
   import { onMount } from 'svelte';
   import { writable } from 'svelte/store';
   import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
+  import { handleLogin } from '../lib/utils';
+  import { initWeb3Auth } from '../lib/authFunctions';
+  import { isLoggedIn } from '../stores/authStore';
 
-  import {
-    initWeb3Auth,
-    connectWallet,
-    logout,
-    getAccountBalance,
-  } from '../lib/authFunctions'; // Updated import path
-
-  let isMenuOpen = false;
-  let isLoggedIn = writable(false); // Reactive variable to track login status
+  $: isDashboard = $page.url.pathname === '/dashboard';
 
   onMount(async () => {
     await initWeb3Auth();
@@ -37,44 +33,9 @@
   function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
-
-  async function handleLogin() {
-    try {
-      const wallet = await connectWallet();
-      if (wallet) {
-         console.log('Connected wallet:', wallet);
-        await delay(4000);
-        isLoggedIn.set(true);
-
-        const balance = await getAccountBalance();
-        console.log(`Account Balance: ${balance} SOL`);
-
-        goto('/dashboard');
-      } else {
-        console.log('Wallet connection failed');
-      }
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
-  }
-
-  async function handleLogout() {
-    try {
-      await logout();
-      console.log('Logged out successfully');
-      isLoggedIn.set(false); // Update login status to reflect the user is logged out
-
-      // Redirect to the homepage
-      goto('/'); // Redirects to the homepage route
-    } catch (error) {
-      console.error('Logout failed:', error);
-      // Handle the error appropriately
-    }
-  }
 </script>
 
 <!-- HTML code remains the same -->
-
 
 <nav class="bg-white shadow-lg">
   <div class="max-w-6xl mx-auto px-4">
@@ -88,14 +49,7 @@
       </a>
 
       <!-- Conditional Button: Login or Logout -->
-      {#if $isLoggedIn}
-        <button
-          on:click={handleLogout}
-          class="py-2 px-3 text-white bg-red-500 rounded hover:bg-red-600 transition duration-300"
-        >
-          Logout
-        </button>
-      {:else}
+      {#if !isDashboard}
         <button
           on:click={handleLogin}
           class="py-2 px-3 text-white bg-green-500 rounded hover:bg-green-600 transition duration-300"
