@@ -1,1 +1,0 @@
-import{l as i,g as t}from"./authFunctions.2a27f1e8.js";import"./scheduler.e3945ab3.js";async function r(){try{console.log("Logging in with Bitbucket..."),await i(),console.log("Login successful."),setTimeout(()=>{t("/dashboard")},3e3)}catch(o){console.error("Login failed:",o)}}export{r as h};

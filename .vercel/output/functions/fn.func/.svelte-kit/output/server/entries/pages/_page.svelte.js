@@ -1,5 +1,4 @@
 import { c as create_ssr_component, v as validate_component } from "../../chunks/ssr.js";
-import "../../chunks/auth.js";
 import "@web3auth/solana-provider";
 import "@solana/web3.js";
 const Main = create_ssr_component(($$result, $$props, $$bindings, slots) => {

@@ -1,5 +1,4 @@
 import { c as create_ssr_component, e as escape, b as add_attribute, v as validate_component } from "../../../chunks/ssr.js";
-import "../../../chunks/auth.js";
 import "@web3auth/solana-provider";
 import "@solana/web3.js";
 import { w as writable } from "../../../chunks/index.js";

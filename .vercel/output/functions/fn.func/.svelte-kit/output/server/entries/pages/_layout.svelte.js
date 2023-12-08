@@ -1,6 +1,5 @@
 import { c as create_ssr_component, a as subscribe, v as validate_component, b as add_attribute } from "../../chunks/ssr.js";
 import { p as page } from "../../chunks/stores.js";
-import "../../chunks/auth.js";
 import "@web3auth/solana-provider";
 import "@solana/web3.js";
 const app = "";
