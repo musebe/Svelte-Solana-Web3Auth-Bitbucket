@@ -15,9 +15,16 @@ export default defineConfig({
 		}),
 		sveltekit(),
 	],
-	build: {chunkSizeWarningLimit:2000 },
+	build: {
+		chunkSizeWarningLimit: 2000,
+	},
 	optimizeDeps: {
-		include: ["dayjs/plugin/relativeTime.js", "dayjs", "@web3auth/ethereum-provider"],
+		include: [
+			"dayjs/plugin/relativeTime.js",
+			"dayjs",
+			"@web3auth/ethereum-provider",
+			"@web3auth/modal"  // Include '@web3auth/modal' in optimizeDeps
+		],
 	},
 	test: {
 		include: ["src/**/*.{test,spec}.{js,ts}"],
