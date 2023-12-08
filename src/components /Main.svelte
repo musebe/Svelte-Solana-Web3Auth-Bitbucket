@@ -6,7 +6,7 @@
 
   onMount(async () => {
     await initWeb3Auth();
-    console.log('Web3Auth initialized');
+    // console.log('Web3Auth initialized');
 
     // Client-side logic
     if (typeof window !== 'undefined') {

@@ -23,7 +23,7 @@ export async function handleConnectWallet(): Promise<void> {
     try {
         const walletConnection = await connectWallet();
         if (walletConnection && walletConnection.userInfo) {
-            console.log('Wallet connected:', walletConnection.solanaWallet);
+            // console.log('Wallet connected:', walletConnection.solanaWallet);
             user.set(walletConnection.userInfo);
             solanaWallet.set(walletConnection.solanaWallet);
         } else {
@@ -31,11 +31,11 @@ export async function handleConnectWallet(): Promise<void> {
         }
     } catch (error: unknown) { // Change from any to unknown
         if (error instanceof Error) {
-            console.error('Connection failed:', error);
+            // console.error('Connection failed:', error);
             errorMessage.set(error.message || 'An error occurred during connection.');
         } else {
             // Handle the case where error is not an instance of Error
-            console.error('Unknown error during connection');
+            // console.error('Unknown error during connection');
             errorMessage.set('An unknown error occurred during connection.');
         }
     } finally {
@@ -63,7 +63,7 @@ export async function handleGetAccountBalance(): Promise<void> {
     try {
         balance.set(await getAccountBalance(currentSolanaWallet));
     } catch (error: any) {
-        console.error('Balance fetch failed:', error);
+        // console.error('Balance fetch failed:', error);
         errorMessage.set(error.message || 'An error occurred while fetching balance.');
     } finally {
         isBalanceLoading.set(false);
@@ -76,10 +76,10 @@ export async function handleGetAccountBalance(): Promise<void> {
 export async function handleLogout(): Promise<void> {
     try {
         await logout();
-        console.log('Logged out successfully');
+        // console.log('Logged out successfully');
         isLoggedIn.set(false);
         goto('/');
     } catch (error) {
-        console.error('Logout failed:', error);
+        // console.error('Logout failed:', error);
     }
 }

@@ -24,9 +24,9 @@ async function ensureWeb3AuthInitialized() {
 export async function initWeb3Auth(): Promise<void> {
     await ensureWeb3AuthInitialized();
     if (!web3auth.provider) {
-        console.log("Initializing Web3Auth modal...");
+        // console.log("Initializing Web3Auth modal...");
         await web3auth.initModal();
-        console.log("Web3Auth modal initialized.");
+        // console.log("Web3Auth modal initialized.");
     } else {
         console.log("Web3Auth modal already initialized.");
     }
@@ -40,10 +40,10 @@ export async function initWeb3Auth(): Promise<void> {
 
 export async function connectWallet() {
     await ensureWeb3AuthInitialized();
-    console.log("Connecting to wallet...");
+    // console.log("Connecting to wallet...");
     const provider = await web3auth.connect();
     if (!provider) {
-        console.error("Provider is null. Failed to connect wallet.");
+        // console.error("Provider is null. Failed to connect wallet.");
         return null;
     }
 
@@ -52,7 +52,7 @@ export async function connectWallet() {
     try {
         userInfo = await web3auth.getUserInfo();
     } catch (error) {
-        console.error("Error retrieving user info:", error);
+        // console.error("Error retrieving user info:", error);
     }
     return { solanaWallet, userInfo };
 }
@@ -63,7 +63,7 @@ export async function connectWallet() {
 export async function logout(): Promise<void> {
     await ensureWeb3AuthInitialized();
     await web3auth.logout();
-    console.log("Logged out successfully.");
+    // console.log("Logged out successfully.");
 }
 
 /**
@@ -72,31 +72,31 @@ export async function logout(): Promise<void> {
 
 export async function getAccountBalance(wallet: SolanaWallet): Promise<number> {
     await ensureWeb3AuthInitialized();
-    console.log("getAccountBalance: Function called");
+    // console.log("getAccountBalance: Function called");
 
     if (!wallet) {
-        console.error("getAccountBalance: Wallet is not provided");
+        // console.error("getAccountBalance: Wallet is not provided");
         throw new Error("Wallet is not provided.");
     }
 
-    console.log("getAccountBalance: Wallet provider is available");
+    // console.log("getAccountBalance: Wallet provider is available");
 
     try {
         const accounts = await wallet.requestAccounts();
-        console.log("getAccountBalance: Accounts retrieved", accounts);
+        // console.log("getAccountBalance: Accounts retrieved", accounts);
 
         const connectionConfig = await wallet.request({
             method: "solana_provider_config",
             params: [],
         }) as { rpcTarget: string };
-        console.log("getAccountBalance: Connection config retrieved", connectionConfig);
+        // console.log("getAccountBalance: Connection config retrieved", connectionConfig);
 
         const connection = new Connection(connectionConfig.rpcTarget);
         const balance = await connection.getBalance(new PublicKey(accounts[0]));
-        console.log("getAccountBalance: Balance fetched", balance);
+        // console.log("getAccountBalance: Balance fetched", balance);
 
         const adjustedBalance = balance / LAMPORTS_PER_SOL;
-        console.log("getAccountBalance: Adjusted balance", adjustedBalance);
+        // console.log("getAccountBalance: Adjusted balance", adjustedBalance);
 
         return adjustedBalance;
     } catch (error) {
@@ -123,7 +123,7 @@ export async function loginWithBitbucket() {
 
         // const user = await web3auth.getUserInfo();
     } catch (error) {
-        console.error('Error logging in with Bitbucket:', error);
+        // console.error('Error logging in with Bitbucket:', error);
     }
 }
 
@@ -133,10 +133,10 @@ export async function loginWithBitbucket() {
  */
 export async function getUserInfo() {
     await ensureWeb3AuthInitialized();
-    console.log("Retrieving user information...");
+    // console.log("Retrieving user information...");
     try {
         const userInfo = await web3auth.getUserInfo();
-        console.log("User information retrieved:", userInfo);
+        // console.log("User information retrieved:", userInfo);
         return userInfo;
     } catch (error) {
         console.error("Error retrieving user information:", error);
