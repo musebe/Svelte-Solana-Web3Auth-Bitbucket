@@ -5,6 +5,12 @@ This guide provides detailed steps to integrate Web3Auth and BitBucket in a Svel
 
 ## Application Demo
 
+### Vercel Live Version
+To engage with the finished application on vercel please visit : [Svelte Solana Web3Auth Bitbucket Application](https://svelte-solana-web3-auth-bitbucket.vercel.app/)
+
+
+### StackBlitz 
+
 To explore and engage with the finished application, please visit the following StackBlitz link: [Svelte Solana Web3Auth Bitbucket Application](https://stackblitz.com/~/github.com/musebe/Svelte-Solana-Web3Auth-Bitbucket).
 
 
