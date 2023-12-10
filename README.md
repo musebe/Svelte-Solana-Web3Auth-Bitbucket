@@ -67,4 +67,4 @@ npm run build
 [Auth0 Setup](https://auth0.com/docs/get-started/applications/application-settings)
 ## Demo
 
-[Final Application Demo](https://res.cloudinary.com/hackit-africa/image/upload/v1688687004/final.gif)
+[Final Application Demo][https://svelte-solana-web3-auth-bitbucket.vercel.app/)
